@@ -1,0 +1,50 @@
+:root {
+  font-family: Helvetica, Inter, system-ui, Avenir, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  /* background-color: #242424; */
+  background-color: white;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --border-box: 1px solid;
+  --green: #2a9d8f;
+  --blue: #264653;
+  --yellow: #e9c46a;
+  --orange: #f4a261;
+  --red: #e76f51;
+
+  --bg-color: white;
+  --text-color: #242424;
+  --border-color: rgb(214, 214, 214);
+  --border-focus: rgb(122, 122, 122);
+  --input-bg: white;
+  --task-bg: white;
+  --btn-bg: #f1f1f1;
+  --task-text-color: #646464;
+  --task-completed-text-color: white;
+  --no-task-color: #b4b4b4;
+
+  --svg-mode: invert(.5);
+}
+
+.dark-mode{
+  --bg-color: #242424;
+  --text-color: white;
+  --border-color: #444;
+  --border-focus: white;
+  --input-bg: #333;
+  --task-bg: #333;
+  --btn-bg: #2b2b2b;
+  --task-text-color: white;
+  --task-completed-text-color: white;
+  --no-task-color: #727272;
+
+  --svg-mode: invert(0);
+}

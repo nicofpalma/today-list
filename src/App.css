@@ -1,0 +1,376 @@
+* {
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+body{
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  
+}
+
+.box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2%;
+}
+
+main{
+  background-color: var(--bg-color);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  height: 85%;
+  border-radius: 10px;
+  color: var(--text-color);
+  border: var(--border-box);
+  border-color: var(--border-color);
+  gap: 20px;
+  padding-bottom: 20px;
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  /* box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2); */
+}
+
+.bg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+}
+
+.footer-btns{
+  display: flex;
+  width: 85px;
+  height: 100px;
+  position: sticky;
+  gap: 10px;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 30%);
+}
+
+.toggle-btns{
+  width: 3rem;
+  height: 7rem;
+  background-color: var(--bg-color);
+  border: var(--border-box);
+  border-color: var(--border-color);
+  cursor: pointer;
+
+  svg{
+    top: 20%;
+    filter: var(--svg-mode);
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+}
+
+@media screen and (min-width: 992px){
+  main{
+    width: 40%;
+    height: 40%;
+  }
+}
+
+.box-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-header, .box-add, .box-body{
+  margin-left: 3vh;
+  margin-right: 3vh;
+}
+
+/* Time */
+.time{
+  border-radius: 5px;
+  height: 3rem;
+  align-items: center;
+  display: flex;
+}
+/* Time */
+
+.box-add{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* Input */
+.add-input{
+  background-color: var(--bg-color);
+  width: 100%;
+  height: 2rem;
+  color: var(--text-color);
+  border: var(--border-box);
+  border-color: var(--border-color);
+  border-radius: 5px;
+  outline: none;
+  box-shadow: 0 0 0 1px var(--border-box) var(--border-color);
+  transition: box-shadow 0.5s ease;
+  padding-left: 10px;
+}
+
+.add-input:focus{
+  box-shadow: 0 0 0 1px var(--border-focus);
+  outline: none;
+}
+
+
+/* Input */
+
+button {
+  position: relative;
+  border-radius: 5px;
+  border: var(--border-box) var(--border-color);
+  padding: 0;
+  margin: 0;
+
+  svg{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.add-btn{
+  height: 2rem;
+  width: 2rem;
+  background-color: var(--bg-color);
+  min-width: 2rem; 
+  min-height: 2rem; 
+  cursor: pointer;
+
+  svg{
+    filter: var(--svg-mode);
+  }
+}
+
+.box-body{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: var(--border-box) var(--border-color);
+  border-radius: 15px;
+  background-color: var(--btn-bg);
+  padding: 10px;
+  gap: 10px;
+  user-select: none;
+
+  .no-tasks{
+    text-align: center;
+    color: var(--no-task-color);
+    font-size: 12px;
+  }
+}
+
+@keyframes shine{
+  from {
+    -webkit-mask-position: 100%;
+    mask-position: 100%;
+  }
+  
+  to {
+    -webkit-mask-position: -50%;
+    mask-position: -50%;
+  }
+}
+
+/* Task */
+.task-box{
+  font-weight: bold;
+  color: var(--task-text-color);
+  background-color: var(--bg-color);
+  border-radius: 5px;
+  width: auto;
+  border: var(--border-box) var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  transition: scale .5s ease-in-out, background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  .task-main{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  .task-text{
+    margin-left: 10px;
+
+    p{
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .task-btns{
+    display: flex;
+    align-items: center;
+  }
+
+  p {
+    padding-left: 45px;
+    margin: 1px;
+  }
+
+  .time-added{
+    font-size: 10px;
+    font-style: italic;
+    font-weight: normal;
+  }
+
+  .option-btn{
+    height: 1.7rem;
+    width: 1.7rem;
+    background-color: var(--btn-bg);
+    min-width: 1.7rem; 
+    min-height: 1.7rem; 
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg{
+      width: 1.2rem;
+      height: 1.2rem;
+      filter: var(--svg-mode);
+    }
+  }
+}
+
+.task-box:hover{
+  -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,1) 30%, rgba(0,0,0,.4) 50%, rgba(0,0,0,1) 70%);
+  mask-image: linear-gradient(-75deg, rgba(0,0,0,1) 30%, rgba(0,0,0,.4) 50%, rgba(0,0,0,1) 70%);
+  -webkit-mask-size: 200%;
+  mask-size: 400%;
+  scale: 102%;
+
+  animation: shine 3s forwards ease;
+}
+
+.done {
+  text-decoration: line-through;
+  text-decoration-style: solid;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 3px;
+  font-style: oblique;
+}
+
+.check{
+  background-color: #f1f1f1;
+  transition: all .5s ease;
+  position: relative;
+  cursor: pointer; 
+
+  svg{
+    width: 1.2rem;
+    height: 1.2rem;
+    filter: invert(.5);
+  }
+}
+
+.checked{
+  background-color: var(--green);
+
+  svg{
+    filter: invert(0);
+  }
+}
+
+.task-box.deleted{
+  scale: 0%;
+}
+
+.task-box.completed{
+  /* background-color: var(--green);
+  color: var(--task-completed-text-color); */
+}
+
+.task-box.completing{
+  animation: completeTask 1s ease backwards;
+}
+
+@keyframes completeTask {
+  0% {
+    background: var(--bg-color);
+
+  }
+  100% {
+    background: radial-gradient(circle, var(--green) 0%, var(--green) 50%, var(--bg-color) 50%, var(--bg-color) 100%);
+
+  }
+}
+
+@keyframes completeTaskCheck{
+  0%{
+    top: -50%;
+    scale: 0%;
+  }
+  50%{
+    top: 50%;
+    scale: 100%;
+  }
+  100%{
+    top: 150%;
+    scale: 0%;
+  }
+}
+
+.task-box::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--green);
+  border-radius: 15%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+  z-index: 10;
+}
+
+.task-box.completing::before {
+  width: 300%;
+  height: 300%;
+}
+
+
+.task-box.completing svg:not(:last-child){
+  width: 5rem;
+  height: 3rem;
+
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+
+  animation: completeTaskCheck 1s ease backwards; 
+
+}
+
+
+
+
+
+
+/* Task */

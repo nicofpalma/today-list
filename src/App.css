@@ -29,7 +29,8 @@ main{
   border: var(--border-box);
   border-color: var(--border-color);
   gap: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
   /* offset-x | offset-y | blur-radius | spread-radius | color */
   /* box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2); */
 }
@@ -80,6 +81,7 @@ main{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 }
 
 .box-header, .box-add, .box-body{
@@ -283,6 +285,10 @@ button {
   /* background-color: var(--green);
   color: var(--task-completed-text-color); */
   background-color: var(--bg-completed-color);
+
+  .edit-input{
+    background-color: var(--bg-completed-color);
+  }
 }
 
 .task-box.completing{
@@ -353,14 +359,13 @@ button {
   background-color: var(--bg-color);
   width: 100%;
   height: 1.2rem;
-  margin-bottom: 1rem;
   border: none;
-  border-left: 1px solid;
-  border-bottom: 1px solid;
-  border-color: var(--border-color);
+  
+  color: var(--task-text-color);
   border-radius: 5px;
   outline: none;
-  padding-left: 5px;
+  font-weight: bold;
+  font-size: 16px;
 
   
 }

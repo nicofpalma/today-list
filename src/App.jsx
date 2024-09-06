@@ -81,14 +81,15 @@ function App() {
 
   return (
     <div className='bg'>
+      <header className='box-header'>
+        <h1>{t("Today's List")}</h1>
+        <div className='time'>
+          <Time></Time>
+        </div>
+      </header>
       <div className='box'>
         <main>
-          <div className='box-header'>
-            <h1>{t("Today's List")}</h1>
-            <div className='time'>
-              <Time></Time>
-            </div>
-          </div>
+
 
           <div className='box-add'>
             <input 
@@ -97,6 +98,7 @@ function App() {
               className='add-input' 
               ref={inputRef}
               onKeyDown={(e) => e.key === 'Enter' && handleAddTask()}
+              maxLength={'100'}
             />
 
             <button className='add-btn' onClick={handleAddTask}><RxPlus /></button>

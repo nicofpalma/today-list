@@ -274,26 +274,6 @@ button {
   font-style: oblique;
 }
 
-.check{
-  background-color: #f1f1f1;
-  transition: all .5s ease;
-  position: relative;
-  cursor: pointer; 
-
-  svg{
-    width: 1.2rem;
-    height: 1.2rem;
-    filter: invert(.5);
-  }
-}
-
-.checked{
-  background-color: var(--green);
-
-  svg{
-    filter: invert(0);
-  }
-}
 
 .task-box.deleted{
   scale: 0%;
@@ -302,6 +282,7 @@ button {
 .task-box.completed{
   /* background-color: var(--green);
   color: var(--task-completed-text-color); */
+  background-color: var(--bg-completed-color);
 }
 
 .task-box.completing{
@@ -363,13 +344,26 @@ button {
   position: absolute;
   transform: translate(-50%, -50%);
   z-index: 11;
+  fill: white !important;
 
   animation: completeTaskCheck 1s ease forwards; 
-
 }
 
+.edit-input{
+  background-color: var(--bg-color);
+  width: 100%;
+  height: 1.2rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-left: 1px solid;
+  border-bottom: 1px solid;
+  border-color: var(--border-color);
+  border-radius: 5px;
+  outline: none;
+  padding-left: 5px;
 
-
+  
+}
 
 
 

@@ -21,6 +21,7 @@
   --red: #e76f51;
 
   --bg-color: white;
+  --bg-completed-color: rgb(235, 235, 235);
   --text-color: #242424;
   --border-color: rgb(214, 214, 214);
   --border-focus: rgb(122, 122, 122);
@@ -29,13 +30,15 @@
   --btn-bg: #f1f1f1;
   --task-text-color: #646464;
   --task-completed-text-color: white;
-  --no-task-color: #b4b4b4;
+  --no-task-color: #311f1f;
 
   --svg-mode: invert(.5);
+  --svg-check-mode: invert(1);
 }
 
 .dark-mode{
   --bg-color: #242424;
+  --bg-completed-color: #424242;
   --text-color: white;
   --border-color: #444;
   --border-focus: white;
@@ -47,4 +50,6 @@
   --no-task-color: #727272;
 
   --svg-mode: invert(0);
+  --svg-check-mode: invert(0);
+
 }

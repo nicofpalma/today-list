@@ -10,6 +10,14 @@ import i18n from './i18n';
 import { TbLanguageOff } from "react-icons/tb";
 import { TbLanguage } from "react-icons/tb";
 
+// TODO: Add tasks to localStorage
+if(localStorage.getItem('idCounter')){
+  let idCounter = parseInt(localStorage.getItem('idCounter')); 
+} else {
+  let idCounter = 0;
+  localStorage.setItem('idCounter', '0');
+}
+
 let tasksIds = 0;
 
 function App() {
@@ -58,6 +66,8 @@ function App() {
       }
   
       setTasks(prev => [newTask, ...prev ]);
+      console.log(tasks);
+      
       inputRef.current.value = '';
     }
   }
@@ -94,7 +104,7 @@ function App() {
           
           </div>
 
-          <div data-glow className='box-body'>
+          <div className='box-body'>
             {tasks.length === 0 
               ? <div className='no-tasks'><p>{t('No tasks added yet')}</p></div>
               : tasks.map(task => (

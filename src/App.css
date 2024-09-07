@@ -2,22 +2,26 @@
   margin: 0;
   padding: 0;
   transition: background-color 0.1s ease, color 0.1s ease;
+  box-sizing: border-box;
+}
+html, body{
+  margin:0;
+  height: 100%;
 }
 
 body{
   background-color: var(--bg-color);
   color: var(--text-color);
-  
 }
 
 .box{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2%;
+  padding: .8rem;
 }
 
-main{
+section{
   background-color: var(--bg-color);
   position: relative;
   display: flex;
@@ -38,7 +42,7 @@ main{
 .bg{
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: auto;
   background-color: var(--bg-color);
 }
 
@@ -46,9 +50,9 @@ main{
   display: flex;
   width: 85px;
   height: 100px;
-  position: sticky;
+  position: fixed;
   gap: 10px;
-  top: 100%;
+  top: 90%;
   left: 50%;
   transform: translate(-50%, 30%);
 }
@@ -69,8 +73,21 @@ main{
   }
 }
 
+.progress-bar-container{
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.progress-bar{
+  position: relative;
+  width: 100%;
+  height: 1.2rem;
+}
+
 @media screen and (min-width: 992px){
-  main{
+  section{
     width: 40%;
     height: 40%;
   }
@@ -266,6 +283,7 @@ button {
   scale: 102%;
 
   animation: shine 3s forwards ease;
+
 }
 
 .done {
@@ -291,10 +309,6 @@ button {
   }
 }
 
-.task-box.completing{
-  /* animation: completeTask .5s ease backwards; */
-}
-
 @keyframes completeTask {
   0% {
     background: var(--bg-color);
@@ -316,7 +330,7 @@ button {
     scale: 100%;
   }
   100%{
-    top: 150%;
+    top: 100%;
     scale: 0%;
   }
 }
@@ -335,13 +349,34 @@ button {
   z-index: 10;
 }
 
-.task-box.completing::before {
+.task-box.deleting::before{
+  background: var(--red);
+}
+
+.task-box.completing, .task-box.deleting{
+  pointer-events: none;
+}
+
+.task-box.completing::before, .task-box.deleting::before {
   width: 300%;
   height: 300%;
 }
 
+.task-box.completing svg{
+  width: 5rem;
+  height: 3rem;
 
-.task-box.completing svg:not(:last-child){
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  fill: white !important;
+
+  animation: completeTaskCheck 1s ease forwards; 
+}
+
+.task-box.deleting .delete-icon{
   width: 5rem;
   height: 3rem;
 
@@ -366,8 +401,6 @@ button {
   outline: none;
   font-weight: bold;
   font-size: 16px;
-
-  
 }
 
 

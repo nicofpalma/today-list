@@ -2,16 +2,18 @@
 import { MdOutlineEdit } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { useEffect, useRef, useState } from "react";
-import './DataGlow.css';
 import { PiCheckFatFill } from "react-icons/pi";
 import { useTranslation } from 'react-i18next';
+import { RiDeleteBin2Fill } from "react-icons/ri";
 import i18n from '../i18n';
+import { playSound } from "./Sounds";
 
 
 export default function Task({taskName, onDelete, id}){
     const [taskDeleted, setTaskDeleted] = useState(false); 
     const [taskCompleted, setTaskCompleted] = useState(false);
     const [isCompleting, setIsCompleting] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
     const [timeAdded, setTimeAdded] = useState('00:00:00');
     const [timeDone, setTimeDone] = useState('00:00:00');
     const [isEditing, setIsEditing] = useState(false);
@@ -51,6 +53,8 @@ export default function Task({taskName, onDelete, id}){
             setIsCompleting(true);
             setTimeDone(getActualTime());
             setTaskCompleted(true);
+
+            playSound('done');
             setTimeout(() => {
                 setIsCompleting(false);
             }, 1000);
@@ -70,11 +74,13 @@ export default function Task({taskName, onDelete, id}){
         setIsEditing(true);
     }
 
-    const handleDelete = (e) => {
-        console.log('asdasdasd');
-        
+    const handleDelete = (e) => {        
         e.stopPropagation();
-        setTaskDeleted(!taskDeleted);
+        setIsDeleting(true);
+        setTimeout(() => {
+            setTaskDeleted(!taskDeleted);
+        }, 1000);
+        playSound('delete');
     }
 
     const handleEditInputClick = (e) => {
@@ -94,12 +100,17 @@ export default function Task({taskName, onDelete, id}){
             className={`task-box 
                 ${taskCompleted ? 'completed' : ''} 
                 ${taskDeleted ? 'deleted' : ''}
-                ${isCompleting ? 'completing' : ''}`
+                ${isCompleting ? 'completing' : ''}
+                ${isDeleting ? 'deleting' : ''}`
             } 
             onClick={handleTaskCompleted}
         >
             {isCompleting && (
                 <PiCheckFatFill></PiCheckFatFill>
+            )}
+
+            {isDeleting && (
+                <RiDeleteBin2Fill className="delete-icon"></RiDeleteBin2Fill>
             )}
 
             <div className='task-content'>
@@ -128,9 +139,9 @@ export default function Task({taskName, onDelete, id}){
             {!isCompleting && (
                 <div className='task-btns'>
                 <button className="option-btn edit" onClick={handleEdit} ><MdOutlineEdit></MdOutlineEdit></button>
-                {!taskCompleted && (
+      
                 <button className="option-btn delete" onClick={handleDelete}><RxCross2></RxCross2></button>
-                    )}
+          
                 </div>
             )}
 

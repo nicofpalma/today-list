@@ -3,12 +3,10 @@ import './App.css';
 import Task from './components/Task';
 import Time from './components/TimeLeft';
 import { RxPlus } from "react-icons/rx";
-import { FaMoon, FaSun } from 'react-icons/fa';
-import '/src/components/DataGlow.js';
 import { useTranslation } from 'react-i18next';
 import i18n from './i18n';
-import { TbLanguageOff } from "react-icons/tb";
-import { TbLanguage } from "react-icons/tb";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import FooterButtons from './components/FooterButtons';
 
 // TODO: Add tasks to localStorage
 if(localStorage.getItem('idCounter')){
@@ -61,7 +59,7 @@ function App() {
   const handleAddTask = () => {
     if(inputRef.current.value.trim() !== ''){
       const newTask = {
-        id: tasksIds++,
+        id: String(tasksIds++),
         name: inputRef.current.value
       }
   
@@ -76,21 +74,26 @@ function App() {
     setTimeout(() => {
       setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
     }, 500);
-
   }
+
+  const onDragEnd = (result) => {
+    if (!result.destination) return;
+
+    const reorderedTasks = Array.from(tasks);
+    const [movedTask] = reorderedTasks.splice(result.source.index, 1);
+    reorderedTasks.splice(result.destination.index, 0, movedTask);
+
+    setTasks(reorderedTasks);
+  };
 
   return (
     <div className='bg'>
       <header className='box-header'>
         <h1>{t("Today's List")}</h1>
-        <div className='time'>
-          <Time></Time>
-        </div>
       </header>
+      <Time></Time>
       <div className='box'>
-        <main>
-
-
+        <section>
           <div className='box-add'>
             <input 
               type="text" 
@@ -102,35 +105,51 @@ function App() {
             />
 
             <button className='add-btn' onClick={handleAddTask}><RxPlus /></button>
-
-          
           </div>
 
           <div className='box-body'>
-            {tasks.length === 0 
-              ? <div className='no-tasks'><p>{t('No tasks added yet')}</p></div>
-              : tasks.map(task => (
-                <Task 
-                  key={task.id}
-                  taskName={task.name}
-                  onDelete={() => handleDeleteTask(task.id)}
-                />
-            ))}
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId='tasks'>
+                {(provided) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    className='task-list'
+                  >
+                    {tasks.length === 0 
+                      ? <div className='no-tasks'><p>{t('No tasks added yet')}</p></div>
+                      : tasks.map((task, index) => (
+                        <Draggable key={task.id} draggableId={task.id} index={index}>
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <Task
+                                key={task.id}
+                                taskName={task.name}
+                                onDelete={() => handleDeleteTask(task.id)}
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
           </div>
-
-        </main>
+        </section>
       </div>
 
-      <div className='footer-btns'>
-        <button className='toggle-btns' onClick={toggleDarkMode}>
-          {darkMode ? <FaSun /> : <FaMoon />}
-        </button>
-
-        <button className='toggle-btns' onClick={toggleLanguage}>
-          {language === 'en' ? <TbLanguage />  : <TbLanguageOff /> }
-        </button>
-      </div>
-
+      <FooterButtons 
+        darkMode={darkMode} 
+        language={language} 
+        toggleDarkMode={toggleDarkMode} 
+        toggleLanguage={toggleLanguage} 
+      />
     </div>
 
   )

@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from './i18n';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import FooterButtons from './components/FooterButtons';
+import Navbar from './components/Navbar';
 
 // TODO: Add tasks to localStorage
 if(localStorage.getItem('idCounter')){
@@ -88,6 +89,12 @@ function App() {
 
   return (
     <div className='bg'>
+      <Navbar
+        darkMode={darkMode} 
+        language={language} 
+        toggleDarkMode={toggleDarkMode} 
+        toggleLanguage={toggleLanguage} 
+      ></Navbar>
       <header className='box-header'>
         <h1>{t("Today's List")}</h1>
       </header>
@@ -119,7 +126,7 @@ function App() {
                     {tasks.length === 0 
                       ? <div className='no-tasks'><p>{t('No tasks added yet')}</p></div>
                       : tasks.map((task, index) => (
-                        <Draggable key={task.id} draggableId={task.id} index={index}>
+                        <Draggable key={task.id} draggableId={task.id} index={index} className='draggable-task'>
                           {(provided) => (
                             <div
                               ref={provided.innerRef}
@@ -144,12 +151,6 @@ function App() {
         </section>
       </div>
 
-      <FooterButtons 
-        darkMode={darkMode} 
-        language={language} 
-        toggleDarkMode={toggleDarkMode} 
-        toggleLanguage={toggleLanguage} 
-      />
     </div>
 
   )

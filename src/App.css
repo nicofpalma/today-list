@@ -35,6 +35,9 @@ section{
   gap: 20px;
   padding-bottom: 1.5rem;
   padding-top: 1.5rem;
+  box-shadow: var(--box-shadow);
+
+
   /* offset-x | offset-y | blur-radius | spread-radius | color */
   /* box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2); */
 }
@@ -45,6 +48,53 @@ section{
   height: auto;
   background-color: var(--bg-color);
 }
+
+nav{
+  background-color: red;
+  display: flex;
+  position: relative;
+  width: 20rem;
+  border-radius: 0 0 15px 15px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  height: 3rem;
+  left: 50%;
+  top: 0px;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
+  transition: transform .2s ease-in-out, box-shadow .5s ease-in-out;
+  gap: 50px;
+
+  button{
+    cursor: pointer;
+    /* opacity: 0; */
+    top: -100%;
+    transition: top .5s ease-out;
+    border: none;
+
+    a:visited{
+      color: inherit;
+    }
+  }
+  
+  svg{
+    filter: var(--svg-mode);
+  }
+
+}
+
+nav:hover{
+  transform: translate(-50%, 0%);
+  box-shadow: var(--box-shadow);
+
+  button{
+    top: 0%;
+
+  }
+}
+
+
 
 .footer-btns{
   display: flex;
@@ -73,6 +123,16 @@ section{
   }
 }
 
+.toggle-options{
+  width: 2rem;
+  height: 2rem;
+  position: fixed;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  cursor: pointer;
+}
+
 .progress-bar-container{
   position: relative;
   justify-content: center;
@@ -90,6 +150,9 @@ section{
   section{
     width: 40%;
     height: 40%;
+  }
+  nav{
+    width: 40%;
   }
 }
 
@@ -186,6 +249,7 @@ button {
   gap: 10px;
   user-select: none;
 
+
   .no-tasks{
     text-align: center;
     color: var(--no-task-color);
@@ -273,6 +337,11 @@ button {
       filter: var(--svg-mode);
     }
   }
+}
+
+/* Margin for the tasks*/
+[data-rbd-draggable-id]{
+  margin-bottom: 3px;
 }
 
 .task-box:hover{
